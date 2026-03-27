@@ -20,5 +20,5 @@ public:
     Star(std::string infoPath, std::string imagePath_);
     friend void drawStar(TDT4102::AnimationWindow& win, Star star);
     friend std::ifstream& operator>> (std::ifstream& inputStream, Star& star);
-    void drawStar(TDT4102::AnimationWindow& win);
+    void drawBody(TDT4102::AnimationWindow& win);
 };
