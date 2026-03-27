@@ -1,9 +1,9 @@
 #pragma once
 #include <iostream>
-#include "AnimationWindow.h"
 #include <fstream>
+#include "Celestialbodies.h"
 
-class Star {
+class Star : public virtual celestialBodies{
 private:
     // Information
     std::string name;
