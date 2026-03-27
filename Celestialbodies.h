@@ -1,7 +1,12 @@
 #pragma once
 #include "AnimationWindow.h"
+#include <string>
 
-class celestialBodies{
+class celestialBody{
     public:
-    void drawBody(TDT4102::AnimationWindow& win);
+    std::string name;
+
+    virtual void drawBody(TDT4102::AnimationWindow& win){
+
+    }
 };
