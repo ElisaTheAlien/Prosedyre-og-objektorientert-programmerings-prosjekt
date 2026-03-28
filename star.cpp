@@ -30,8 +30,8 @@ void Star::drawBody(TDT4102::AnimationWindow& win) {
     const int textBox_height = win_height/10;
     win.draw_rectangle(textBoxUpperLeft, textBox_width, textBox_height, TDT4102::Color::black);
     const int textPad = win_width/75;
-    const TDT4102::Point nameUpperLeft {2*win_width/3,win_height/20};
-    const int nameSize = win_height/18;
+    const TDT4102::Point nameUpperLeft {win_width/10,win_height/18};
+    const int nameSize = win_height/10;
     const int textLeftPad = win_width/2;
     const int textUpperPad = win_height/4;
     const int textSize = textPad;
@@ -44,4 +44,5 @@ void Star::drawBody(TDT4102::AnimationWindow& win) {
     TDT4102::Point imageUpperLeft {win_width/8, win_height/6};
     const int image_width = win_width/4;
     win.draw_image(imageUpperLeft, image, image_width, image_width);
+    win.next_frame();
 }
