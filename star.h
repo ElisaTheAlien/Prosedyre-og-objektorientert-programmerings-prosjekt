@@ -1,7 +1,9 @@
 #pragma once
+
 #include <fstream>
 #include <filesystem>
 #include "Celestialbodies.h"
+
 
 class Star : public celestialBody {
 private:

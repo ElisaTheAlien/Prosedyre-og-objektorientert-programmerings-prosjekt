@@ -35,13 +35,13 @@ void Star::drawBody(TDT4102::AnimationWindow& win) {
     const int textLeftPad = win_width/2;
     const int textUpperPad = win_height/4;
     const int textSize = textPad;
-    win.draw_text(nameUpperLeft, star.name, TDT4102::Color::white, nameSize, TDT4102::Font::courier_bold);
-    win.draw_text({textLeftPad,textUpperPad}, "Magnitude: " + star.magnitude, TDT4102::Color::white, textSize,TDT4102::Font::courier_italic);
-    win.draw_text({textLeftPad,textUpperPad + textPad}, "Distance: " + star.distance + " light years", TDT4102::Color::white, textSize,TDT4102::Font::courier_italic);
-    win.draw_text({textLeftPad,textUpperPad + 2 * textPad}, "Spectral Type: " + star.spectralType, TDT4102::Color::white, textSize,TDT4102::Font::courier_italic);
-    win.draw_text({textLeftPad,textUpperPad + 3 * textPad}, "Ra/Dec: " + star.Ra_Dec, TDT4102::Color::white, textSize,TDT4102::Font::courier_italic);
-    win.draw_text({textLeftPad,textUpperPad + 4 * textPad}, "Az/Alt: " + star.Az_Alt, TDT4102::Color::white, textSize,TDT4102::Font::courier_italic);
+    win.draw_text(nameUpperLeft, name, TDT4102::Color::white, nameSize, TDT4102::Font::courier_bold);
+    win.draw_text({textLeftPad,textUpperPad}, "Magnitude: " + magnitude, TDT4102::Color::white, textSize,TDT4102::Font::courier_italic);
+    win.draw_text({textLeftPad,textUpperPad + textPad}, "Distance: " + distance + " light years", TDT4102::Color::white, textSize,TDT4102::Font::courier_italic);
+    win.draw_text({textLeftPad,textUpperPad + 2 * textPad}, "Spectral Type: " + spectralType, TDT4102::Color::white, textSize,TDT4102::Font::courier_italic);
+    win.draw_text({textLeftPad,textUpperPad + 3 * textPad}, "Ra/Dec: " + Ra_Dec, TDT4102::Color::white, textSize,TDT4102::Font::courier_italic);
+    win.draw_text({textLeftPad,textUpperPad + 4 * textPad}, "Az/Alt: " + Az_Alt, TDT4102::Color::white, textSize,TDT4102::Font::courier_italic);
     TDT4102::Point imageUpperLeft {win_width/8, win_height/6};
     const int image_width = win_width/4;
-    win.draw_image(imageUpperLeft, star.image, image_width, image_width);
+    win.draw_image(imageUpperLeft, image, image_width, image_width);
 }
