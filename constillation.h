@@ -1,6 +1,7 @@
 #include <iostream>
+#include "Celestialbodies.h"
 
-class Constillation {
+class Constillation : public celestialBody{
     protected:
         std::string name;
         std::string distance;
@@ -9,4 +10,5 @@ class Constillation {
         const std::string& getName() const {
             return name;
         }
+        void drawBody(TDT4102::AnimationWindow& win) override;
 };
