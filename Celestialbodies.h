@@ -1,6 +1,6 @@
 #pragma once
 #include "AnimationWindow.h"
-#include <string>
+#include <iostream>
 
 class celestialBody{
     public:
