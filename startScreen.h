@@ -3,6 +3,7 @@
 #include <filesystem>
 #include <fstream>
 #include "AnimationWindow.h"
+#include "widgets/Button.h"
 
 class startScreen{
     private: 
@@ -15,4 +16,5 @@ class startScreen{
     friend std::ifstream& operator>>(std::ifstream& inputStream, startScreen& start);
     void animation(TDT4102::AnimationWindow& win);
     void draw(TDT4102::AnimationWindow& win);
+    void Callback();
 };
