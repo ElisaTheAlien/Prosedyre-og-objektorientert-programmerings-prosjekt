@@ -3,6 +3,7 @@
 #include "widgets/Button.h"
 #include <iostream>
 #include <string>
+#include <vector>
 class runStellar{
 
     private:

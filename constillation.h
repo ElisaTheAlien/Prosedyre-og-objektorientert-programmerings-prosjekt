@@ -1,5 +1,7 @@
 #include <iostream>
 #include "Celestialbodies.h"
+#include <vector>
+#include "star.h"
 
 class Constillation : public celestialBody{
     protected:
@@ -8,6 +10,10 @@ class Constillation : public celestialBody{
 
         std::filesystem::path image_path;
         TDT4102::Image image;
+
+        const int index;
+
+        std::vector<Star*> stars;
     
     public:
         Constillation (std::string name_, std::string imagePath_);
