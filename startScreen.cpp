@@ -27,6 +27,7 @@ void startScreen::draw(TDT4102::AnimationWindow& win){
     startButton.setCallback(Callback);
     win.add(startButton);
     const int maxRadius = 2*win_width/3;
+    TDT4102::Point Position{win_width/2-maxRadius, win_height/2-maxRadius};
     win.draw_image(Position, image, maxRadius, maxRadius);
     const int textPad = win_width/75;
     const TDT4102::Point nameUpperLeft {win_width/10,win_height/18};
