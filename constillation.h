@@ -16,6 +16,7 @@ class Constillation : public celestialBody{
         std::vector<Star*> stars;
     
     public:
+        bool show = false;
         Constillation (std::string name_, std::string imagePath_);
         const std::string& getName() const {
             return name;

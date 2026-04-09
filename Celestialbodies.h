@@ -6,6 +6,7 @@
 class celestialBody{
     public:
     std::string name;
+    int index;
 
     virtual void drawBody(TDT4102::AnimationWindow& win){
 

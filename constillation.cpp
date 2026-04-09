@@ -1,7 +1,7 @@
 #include "constillation.h"
 
 Constillation::Constillation (std::string name_, std::string imagePath_): 
-    image_path{imagePath_}, image{image_path}, name{name_}       
+    image_path{imagePath_}, image{image_path}, name{name_}
 {}
 
 void Constillation::drawBody(TDT4102::AnimationWindow& win){
