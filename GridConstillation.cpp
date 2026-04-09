@@ -1,4 +1,4 @@
-#include "Grid.h"
+#include "GridConstillation.h"
 
 void GridConstillation::GridMaking(TDT4102::AnimationWindow& window){
 
@@ -21,9 +21,9 @@ void GridConstillation::GridMaking(TDT4102::AnimationWindow& window){
 }
 
 void GridConstillation::CallbackButton1(){
-    
+    show1 = true;
 }
 
 void GridConstillation::CallbackButton2(){
-
+    show2 = true;
 }
