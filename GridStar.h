@@ -3,6 +3,7 @@
 
 class GridStar : public TDT4102::AnimationWindow {
     public:
+        GridStar() = default;
         void GridMaking(TDT4102::AnimationWindow& window);
         void CallbackButton1();
         void CallbackButton2();
