@@ -3,10 +3,11 @@
 
 class Grid : public TDT4102::AnimationWindow {
     public:
-        Grid(int width, int height, const std::string& title) : TDT4102::AnimationWindow(width, height, title){
+        void GridMaking(TDT4102::AnimationWindow& window);
 
-        }
-
+    protected:
+        TDT4102::Button button1;
+        TDT4102::Button button2;
 };
 
-void Grid(TDT4102::AnimationWindow& window);
+

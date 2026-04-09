@@ -1,6 +1,6 @@
 #include "Grid.h"
 
-void Grid(TDT4102::AnimationWindow& window){
+void Grid::GridMaking(TDT4102::AnimationWindow& window){
 
     double winWidth = window.width();
     double winHeight = window.height();
