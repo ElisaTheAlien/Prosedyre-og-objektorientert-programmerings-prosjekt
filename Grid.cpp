@@ -1,6 +1,6 @@
 #include "Grid.h"
 
-void Grid::GridMaking(TDT4102::AnimationWindow& window){
+void GridConstillation::GridMaking(TDT4102::AnimationWindow& window){
 
     double winWidth = window.width();
     double winHeight = window.height();
@@ -17,4 +17,12 @@ void Grid::GridMaking(TDT4102::AnimationWindow& window){
     TDT4102::Button button2 {buttonPosition2, buttonWidth, buttonHeight, buttonLabel};
 
     window.wait_for_close();
+}
+
+void GridConstillation::CallbackButton1(TDT4102::AnimationWindow& window){
+    
+}
+
+void GridConstillation::CallbackButton2(TDT4102::AnimationWindow& window){
+
 }
