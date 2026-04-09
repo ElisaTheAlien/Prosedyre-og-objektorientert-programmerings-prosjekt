@@ -11,8 +11,6 @@ class Constillation : public celestialBody{
         std::filesystem::path image_path;
         TDT4102::Image image;
 
-        const int index;
-
         std::vector<Star*> stars;
     
     public:
