@@ -2,7 +2,7 @@
 
 Star::Star(std::string infoPath, std::string imagePath_) 
     : image_path{imagePath_},    
-      image{image_path}          
+      image{image_path}
 {
     std::ifstream inputStream{infoPath};
     if (inputStream) {

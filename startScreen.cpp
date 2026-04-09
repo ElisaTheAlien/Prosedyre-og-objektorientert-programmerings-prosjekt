@@ -11,7 +11,7 @@ startScreen::startScreen(std::string textPath, std::string imagePath_)
 }
 
 void startScreen::Callback(){
-    std::cout << "Test" << std::endl;
+    begin = true;
 }
 
 void startScreen::draw(TDT4102::AnimationWindow& win){

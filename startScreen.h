@@ -17,4 +17,5 @@ class startScreen{
     void animation(TDT4102::AnimationWindow& win);
     void draw(TDT4102::AnimationWindow& win);
     void Callback();
+    bool begin = false;
 };
