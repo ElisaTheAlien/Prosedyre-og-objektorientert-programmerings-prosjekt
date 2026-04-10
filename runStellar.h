@@ -15,6 +15,7 @@ class runStellar{
         bool mainMenu = false;
 
     public:
+        void callbackQuit();
         void callbackConstillation();
         void callbackStar();
         void callbackMainMenu();

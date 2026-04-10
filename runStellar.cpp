@@ -5,6 +5,10 @@
 #include "GridConstillation.h"
 #include "GridStar.h"
 
+void runStellar::callbackQuit(){
+    quit = true;
+}
+
 void runStellar::callbackConstillation(){
     backConstillation = true;
 }
