@@ -3,7 +3,7 @@
 
 class GridConstillation : public TDT4102::AnimationWindow {
     public:
-        void GridMaking(TDT4102::AnimationWindow& window);
+        void GridMaking(TDT4102::AnimationWindow& window, TDT4102::Button& button1, TDT4102::Button& button2);
         void CallbackButton1();
         void CallbackButton2();
         bool show1 = false;
