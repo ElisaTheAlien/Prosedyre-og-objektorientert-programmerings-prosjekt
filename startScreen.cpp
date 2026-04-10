@@ -1,5 +1,5 @@
 #include "startScreen.h"
-startScreen(std::string textPath, std::string earthPath_, std::string rocketPath_)
+startScreen::startScreen(std::string textPath, std::string earthPath_, std::string rocketPath_)
         : earthPath{earthPath_},    
       image{earthPath}, rocketPath{rocketPath_},    
       image{rocketPath}          
@@ -55,15 +55,15 @@ void startScreen::startAnimation(TDT4102::AnimationWindow& win){
     }
 }
 
-void startScreen::endAnimation(){
+void startScreen::endAnimation(TDT4102::AnimationWindow& win){
     TDT4102::Image backgroundImage("Startscreen/background.jpg");
     const int win_width = win.width();
     const int win_height = win.height();
     int xPosition = win_width/2; 
     TDT4102::Point startPosition {win_width/2-rocket.width/2, win_height/2-rocket.height/2};
-    while(xPostion--){
+    while(xPosition--){
         win.draw_image({0,0}, backgroundImage, win_width, win_height);
-        win.draw_image({startPosition}-{xPostion, 0}, rocket, rocket.width, rocket.height});
+        win.draw_image({startPosition}-{xPostion, 0}, rocket, rocket.width, rocket.height);
         win.next_frame();
     }
 }
