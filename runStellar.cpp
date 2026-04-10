@@ -27,22 +27,24 @@ void runStellar::run(TDT4102::AnimationWindow& window){
     Constillation Orion("Bodies/Orion/orion.txt","Bodies/Orion/orion.png"); 
     Constillation bigDipper("Bodies/Bigdipper/bigdipper.txt","Bodies/Bigdipper/bigdipper.png");
     Star Betelgeuse("Bodies/Betelgeuse.txt", "Bodies/Orion/Betelgeuse.png");
+    constGrid.GridMaking(window);
+    orionGrid.GridMaking(window);
+    bigDipperGrid.GridMaking(window);
     start.startAnimation(window);
-    start.draw(window);
-    if(start.begin){
-        start.endAnimation(window);
+    while(!start.begin){
+        start.draw(window);
     }
     while(start.begin) {
-        {constGrid.GridMaking(window);}
+
         if(constGrid.show1) {
             constGrid.show1 = false;
             Orion.drawBody(window);
-            {orionGrid.GridMaking(window);}
+           
             
             if(orionGrid.show1) {
                 orionGrid.show1 = false;
-                Betelgeuse.drawBody(window);
-                
+    
+
             }
 
 
@@ -50,7 +52,7 @@ void runStellar::run(TDT4102::AnimationWindow& window){
         if(constGrid.show2) {
             constGrid.show2 = false;
             bigDipper.drawBody(window);
-            bigDipperGrid.GridMaking(window);
+     
         }
         window.next_frame();
     }
