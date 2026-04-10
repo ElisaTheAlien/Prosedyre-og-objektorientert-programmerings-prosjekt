@@ -14,9 +14,10 @@ class startScreen{
     TDT4102::Image rocket;
 
     public: 
-    startScreen(std::string textPath, std::string eartPath_, std::string rocketPath_);
+    startScreen(std::string textPath, std::string earthPath_, std::string rocketPath_);
     friend std::ifstream& operator>>(std::ifstream& inputStream, startScreen& start);
-    void animation(TDT4102::AnimationWindow& win);
+    void startAnimation(TDT4102::AnimationWindow& win);
+    void endAnimation(TDT4102::AnimationWindow& win);
     void draw(TDT4102::AnimationWindow& win);
     void Callback();
     bool begin = false;
