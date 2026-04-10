@@ -44,5 +44,4 @@ void Star::drawBody(TDT4102::AnimationWindow& win) {
     TDT4102::Point imageUpperLeft {win_width/8, win_height/6};
     const int image_width = win_width/4;
     win.draw_image(imageUpperLeft, image, image_width, image_width);
-    win.next_frame();
 }

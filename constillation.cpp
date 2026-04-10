@@ -15,5 +15,4 @@ void Constillation::drawBody(TDT4102::AnimationWindow& win){
     const int image_height = win_height;
     TDT4102::Point imageUpperLeft {win_width/2-image_width/2, win_height/2-image_height/2};
     win.draw_image(imageUpperLeft, image, image_width, image_height);
-    win.next_frame();
 }
