@@ -33,6 +33,9 @@ void runStellar::run(TDT4102::AnimationWindow& window){
         if(constGrid.show1) {
             Orion.drawBody(window);
             orionGrid.GridMaking(window);
+            
+            
+            
         }
         if(constGrid.show2) {
             bigDipper.drawBody(window);
