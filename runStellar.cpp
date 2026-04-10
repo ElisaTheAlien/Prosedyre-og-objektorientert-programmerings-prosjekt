@@ -20,8 +20,8 @@ void runStellar::callbackMainMenu(){
 }
 
 void runStellar::run(TDT4102::AnimationWindow& window){
-    double winWidth = window.width();
-    double winHeight = window.height();
+    int winWidth = window.width();
+    int winHeight = window.height();
 
     const TDT4102::Point buttonPosition1 {0, 0};
     const TDT4102::Point buttonPosition2 {winWidth/2, 0};
@@ -33,6 +33,13 @@ void runStellar::run(TDT4102::AnimationWindow& window){
     TDT4102::Button BigDipperButton {buttonPosition2, buttonWidth, buttonHeight, buttonLabel};
     TDT4102::Button BetegeuseButton {buttonPosition1, buttonWidth, buttonHeight, buttonLabel};
     TDT4102::Button RigelButton {buttonPosition2, buttonWidth, buttonHeight, buttonLabel};
+
+    const TDT4102::Point startButtonPosition {winWidth/2, winHeight/4};
+    const unsigned int startButtonWidth = 100;
+    const unsigned int startButtonHeight = 40;
+    const std::string startButtonLabel = "Begin";
+    TDT4102::Button startButton {startButtonPosition, startButtonWidth, startButtonHeight, startButtonLabel};
+    window.add(startButton);
     
     startScreen start("Startscreen/welcome.txt", "Startscreen/earth.png", "Drawing of rocket/Rocket from earth.png");
     GridConstillation constGrid;
@@ -48,7 +55,7 @@ void runStellar::run(TDT4102::AnimationWindow& window){
     start.startAnimation(window);
 
     while(!start.begin){
-        start.draw(window);
+        start.draw(window, startButton);
     }
     while(start.begin) {
 
