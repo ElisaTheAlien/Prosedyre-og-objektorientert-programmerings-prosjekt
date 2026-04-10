@@ -38,11 +38,6 @@ void startScreen::draw(TDT4102::AnimationWindow& win){
     win.draw_text(nameUpperLeft, text, TDT4102::Color::white, nameSize, TDT4102::Font::courier_bold);
 }
 
-TDT4102::Point operator- (TDT4102::Point rhs, TDT4102::Point lhs){
-    TDT4102::Point newPoint {rhs.x-lhs.x, rhs.y-lhs.y};
-    return newPoint;
-}
-
 void startScreen::startAnimation(TDT4102::AnimationWindow& win){
     TDT4102::Image backgroundImage("Startscreen/background.jpg");
     const int win_width = win.width();
@@ -63,7 +58,7 @@ void startScreen::endAnimation(TDT4102::AnimationWindow& win){
     TDT4102::Point startPosition {win_width/2-rocket.width/2, win_height/2-rocket.height/2};
     while(xPosition--){
         win.draw_image({0,0}, backgroundImage, win_width, win_height);
-        win.draw_image({startPosition}-{xPostion, 0}, rocket, rocket.width, rocket.height);
+        win.draw_image({win_width/2-rocket.width/2-xPosition, win_height/2-rocket.height/2}, rocket, rocket.width, rocket.height);
         win.next_frame();
     }
 }
