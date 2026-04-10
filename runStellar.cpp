@@ -20,7 +20,7 @@ void runStellar::callbackMainMenu(){
 }
 
 void runStellar::run(TDT4102::AnimationWindow& window){
-    startScreen start("Startscreen/welcome.txt", "Startscreen/earth.png");
+    startScreen start("Startscreen/welcome.txt", "Startscreen/earth.png", "Drawing of rocket/Rocket from earth.png");
     GridConstillation constGrid;
     GridStar orionGrid;
     GridStar bigDipperGrid;
@@ -30,11 +30,11 @@ void runStellar::run(TDT4102::AnimationWindow& window){
     start.draw(window);
     while(start.begin) {
         constGrid.GridMaking(window);
-        while(constGrid.show1) {
+        if(constGrid.show1) {
             Orion.drawBody(window);
             orionGrid.GridMaking(window);
         }
-        while(constGrid.show2) {
+        if(constGrid.show2) {
             bigDipper.drawBody(window);
             bigDipperGrid.GridMaking(window);
         }

@@ -8,11 +8,13 @@
 class startScreen{
     private: 
     std::string text;
-    std::filesystem::path image_path;
-    TDT4102::Image image;
+    std::filesystem::path earthPath;
+    std::filesystem::path rocketPath;
+    TDT4102::Image earth;
+    TDT4102::Image rocket;
 
     public: 
-    startScreen(std::string textPath, std::string imagePath_);
+    startScreen(std::string textPath, std::string eartPath_, std::string rocketPath_);
     friend std::ifstream& operator>>(std::ifstream& inputStream, startScreen& start);
     void animation(TDT4102::AnimationWindow& win);
     void draw(TDT4102::AnimationWindow& win);
