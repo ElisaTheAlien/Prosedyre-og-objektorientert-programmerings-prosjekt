@@ -12,10 +12,12 @@ void GridConstillation::GridMaking(TDT4102::AnimationWindow& window){
     const std::string buttonLabel = "";
 
     TDT4102::Button button1 {buttonPosition1, buttonWidth, buttonHeight, buttonLabel};
+    button1.isVisible = false;
     button1.setCallback(std::bind(&GridConstillation::CallbackButton1, this));
     window.add(button1);
 
     TDT4102::Button button2 {buttonPosition2, buttonWidth, buttonHeight, buttonLabel};
+    button2.isVisible = false;
     button2.setCallback(std::bind(&GridConstillation::CallbackButton2, this));
     window.add(button2);
 }
