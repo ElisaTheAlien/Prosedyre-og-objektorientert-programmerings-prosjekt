@@ -38,12 +38,13 @@ void runStellar::run(TDT4102::AnimationWindow& window){
     GridConstillation constGrid;
     GridStar orionGrid;
     GridStar bigDipperGrid;
-    Constillation Orion("Bodies/Orion/orion.txt","Bodies/Orion/orion.png"); 
-    Constillation bigDipper("Bodies/Bigdipper/bigdipper.txt","Bodies/Bigdipper/bigdipper.png");
+    Constillation Orion("Orion","Bodies/Orion/orion.png"); 
+    Constillation bigDipper("BigDipper","Bodies/Bigdipper/Big-Dipper-1.jpg");
     Star Betelgeuse("Bodies/Betelgeuse.txt", "Bodies/Orion/Betelgeuse.png");
+    Star Rigel("Bodies/Rigel.txt", "Bodies/Rigel/Rigel.png");
     constGrid.GridMaking(window, OrionButton, BigDipperButton);
     orionGrid.GridMaking(window, BetegeuseButton, RigelButton);
-    bigDipperGrid.GridMaking(window);
+
     start.startAnimation(window);
 
     while(!start.begin){
@@ -51,7 +52,29 @@ void runStellar::run(TDT4102::AnimationWindow& window){
     }
     while(start.begin) {
 
-        constGrid.
+        if(constGrid.show1){
+            OrionButton.setVisible(false);
+            BigDipperButton.setVisible(false);
+            Orion.drawBody(window);
+
+            if(orionGrid.show1){
+                BetegeuseButton.setVisible(false);
+                RigelButton.setVisible(false);
+                Betelgeuse.drawBody(window);
+            }
+
+            if(orionGrid.show2){
+                BetegeuseButton.setVisible(false);
+                RigelButton.setVisible(false);
+                Rigel.drawBody(window);
+            }
+
+        }
+        if(constGrid.show2){
+            OrionButton.setVisible(false);
+            BigDipperButton.setVisible(false);
+            bigDipper.drawBody(window);
+        }
 
         window.next_frame();
     }
