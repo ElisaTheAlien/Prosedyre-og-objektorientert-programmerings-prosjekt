@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include "Celestialbodies.h"
 #include <vector>

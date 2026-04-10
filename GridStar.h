@@ -1,3 +1,4 @@
+#pragma once
 #include "AnimationWindow.h"
 #include "widgets/Button.h"
 
