@@ -5,6 +5,16 @@
 #include "GridConstillation.h"
 #include "GridStar.h"
 
+void runStellar::callbackConstillation(){
+    backConstillation = true;
+}
+void runStellar::callbackStar(){
+    backStar = true;
+}
+void runStellar::callbackMainMenu(){
+    mainMenu = true;
+}
+
 void runStellar::run(TDT4102::AnimationWindow& window){
     startScreen start("Startscreen/welcome.txt", "Startscreen/earth.png");
     GridConstillation constGrid;
@@ -18,7 +28,7 @@ void runStellar::run(TDT4102::AnimationWindow& window){
         while(start.begin) {
             constGrid.GridMaking(window);
             Orion.show = constGrid.show1;
-            bigDipper = constGrid.show2;
+            bigDipper.show = constGrid.show2;
             while(Orion.show) {
                 Orion.drawBody(window);
                 orionGrid.GridMaking(window);
