@@ -26,18 +26,26 @@ void runStellar::run(TDT4102::AnimationWindow& window){
     GridStar bigDipperGrid;
     Constillation Orion("Bodies/Orion/orion.txt","Bodies/Orion/orion.png"); 
     Constillation bigDipper("Bodies/Bigdipper/bigdipper.txt","Bodies/Bigdipper/bigdipper.png");
+    Star Betelgeuse("Bodies/Betelgeuse.txt", "Bodies/Orion/Betelgeuse.png");
     start.animation(window);
     start.draw(window);
     while(start.begin) {
-        constGrid.GridMaking(window);
+        {constGrid.GridMaking(window);}
         if(constGrid.show1) {
+            constGrid.show1 = false;
             Orion.drawBody(window);
-            orionGrid.GridMaking(window);
+            {orionGrid.GridMaking(window);}
             
-            
-            
+            if(orionGrid.show1) {
+                orionGrid.show1 = false;
+                Betelgeuse.drawBody(window);
+                
+            }
+
+
         }
         if(constGrid.show2) {
+            constGrid.show2 = false;
             bigDipper.drawBody(window);
             bigDipperGrid.GridMaking(window);
         }
