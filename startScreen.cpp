@@ -28,7 +28,7 @@ void startScreen::draw(TDT4102::AnimationWindow& win){
     win.add(startButton);
     const int maxRadius = 2*win_width/3;
     TDT4102::Point Position{win_width/2-maxRadius, win_height/2-maxRadius};
-    win.draw_image(Position, image, maxRadius, maxRadius);
+    win.draw_image(Position, earth, maxRadius, maxRadius);
     const int textPad = win_width/75;
     const TDT4102::Point nameUpperLeft {win_width/10,win_height/18};
     const int nameSize = win_height/10;
@@ -50,7 +50,7 @@ void startScreen::startAnimation(TDT4102::AnimationWindow& win){
     TDT4102::Point Position {win_width/2, win_height/2};
     for (int radius = 0; radius < win_width/3; radius++) {
         win.draw_image({0,0}, backgroundImage, win_width, win_height);
-        win.draw_image(Position, image, 2*radius, 2*radius);
+        win.draw_image(Position, earth, 2*radius, 2*radius);
         win.next_frame();
     }
 }
