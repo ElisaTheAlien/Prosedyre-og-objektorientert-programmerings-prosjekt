@@ -24,7 +24,7 @@ void startScreen::draw(TDT4102::AnimationWindow& win){
     const int buttonHeight = 40;
     const std::string buttonLabel = "Explore the nightsky!";
     TDT4102::Button startButton {buttonPosition, buttonWidth, buttonHeight, buttonLabel};
-    startButton.setCallback(Callback);
+    startButton.setCallback(std::bind(Callback, this));
     win.add(startButton);
     const int maxRadius = 2*win_width/3;
     TDT4102::Point Position{win_width/2-maxRadius, win_height/2-maxRadius};
