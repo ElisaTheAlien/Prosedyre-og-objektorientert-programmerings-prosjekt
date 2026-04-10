@@ -1,8 +1,8 @@
 #include "startScreen.h"
 startScreen::startScreen(std::string textPath, std::string earthPath_, std::string rocketPath_)
         : earthPath{earthPath_},    
-      image{earthPath}, rocketPath{rocketPath_},    
-      image{rocketPath}          
+      earth{earthPath}, rocketPath{rocketPath_},    
+      rocket{rocketPath}          
 {
     std::ifstream inputStream{textPath};
     if (inputStream) {
