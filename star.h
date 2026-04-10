@@ -17,7 +17,6 @@ private:
     TDT4102::Image image;
 
 public:
-    bool show = false;
     Star(std::string infoPath, std::string imagePath_);
     friend std::ifstream& operator>>(std::ifstream& inputStream, Star& star);
     void drawBody(TDT4102::AnimationWindow& win) override;

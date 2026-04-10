@@ -24,23 +24,20 @@ void runStellar::run(TDT4102::AnimationWindow& window){
     GridConstillation constGrid;
     GridStar orionGrid;
     GridStar bigDipperGrid;
-    Constillation Orion("",""); 
-    Constillation bigDipper("","");
+    Constillation Orion("Bodies/Orion/orion.txt","Bodies/Orion/orion.png"); 
+    Constillation bigDipper("Bodies/Bigdipper/bigdipper.txt","Bodies/Bigdipper/bigdipper.png");
     start.animation(window);
-    while(!quit){
-        start.draw(window);
-        while(start.begin) {
-            constGrid.GridMaking(window);
-            Orion.show = constGrid.show1;
-            bigDipper.show = constGrid.show2;
-            while(Orion.show) {
-                Orion.drawBody(window);
-                orionGrid.GridMaking(window);
-            }
-            while(bigDipper.show) {
-                bigDipper.drawBody(window);
-                bigDipperGrid.GridMaking(window);
-            }
+    start.draw(window);
+    while(start.begin) {
+        constGrid.GridMaking(window);
+        while(constGrid.show1) {
+            Orion.drawBody(window);
+            orionGrid.GridMaking(window);
         }
+        while(constGrid.show2) {
+            bigDipper.drawBody(window);
+            bigDipperGrid.GridMaking(window);
+        }
+        window.next_frame();
     }
 }
