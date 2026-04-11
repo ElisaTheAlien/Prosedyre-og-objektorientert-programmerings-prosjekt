@@ -14,12 +14,11 @@ void startScreen::Callback(){
     begin = true;
 }
 
-void startScreen::draw(TDT4102::AnimationWindow& win, TDT4102::Button& startButton){
+void startScreen::draw(TDT4102::AnimationWindow& win){
     TDT4102::Image backgroundImage("background.jpg");
     const int win_width = win.width();
     const int win_height = win.height();
     win.draw_image({0,0}, backgroundImage, win_width, win_height);
-    startButton.setCallback(std::bind(Callback, this));
     const int maxRadius = 2*win_width/3;
     TDT4102::Point Position{win_width/2-maxRadius, win_height/2-maxRadius};
     win.draw_image(Position, earth, maxRadius, maxRadius);

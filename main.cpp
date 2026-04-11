@@ -2,12 +2,10 @@
 #include "constillation.h"
 #include "star.h"
 #include "startScreen.h"
+#include "Stellar.h"
 
 int main() {
-    TDT4102::AnimationWindow win (0,0,300,200); 
-    TDT4102::AnimationWindow* ptr = &win;
-    runStellar Stellar;
-    Stellar.run(*ptr);
-    return 0;
+    Stellar stellar({0,0}, 3000, 2000, "Stellar");
+    stellar.run();
 }
 

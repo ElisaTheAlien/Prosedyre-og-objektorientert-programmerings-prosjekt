@@ -18,7 +18,7 @@ class startScreen{
     friend std::ifstream& operator>>(std::ifstream& inputStream, startScreen& start);
     void startAnimation(TDT4102::AnimationWindow& win);
     void endAnimation(TDT4102::AnimationWindow& win);   
-    void startScreen::draw(TDT4102::AnimationWindow& win, TDT4102::Button& startButton);
+    void startScreen::draw(TDT4102::AnimationWindow& win);
     void Callback();
     bool begin = false;
 };

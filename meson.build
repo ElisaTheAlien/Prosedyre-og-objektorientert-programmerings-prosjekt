@@ -19,7 +19,8 @@ src = [
 'main.cpp',
 'runStellar.cpp',
 'star.cpp',
-'startScreen.cpp'
+'startScreen.cpp',
+'Stellar.cpp'
 ]
 
 if host_machine.system() == 'windows'
