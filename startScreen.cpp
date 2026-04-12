@@ -16,7 +16,7 @@ void startScreen::draw(TDT4102::AnimationWindow& win){
     const int win_width = win.width();
     const int win_height = win.height();
     win.draw_image({0,0}, backgroundImage, win_width, win_height);
-    const int maxRadius = win_height/3;
+    const int maxRadius = win_height/5;
     TDT4102::Point Position{win_width/2-maxRadius, win_height/2-maxRadius};
     win.draw_image(Position, earth, 2*maxRadius, 2*maxRadius);
     const int textPad = win_width/75;
@@ -32,7 +32,7 @@ void startScreen::startAnimation(TDT4102::AnimationWindow& win){
     TDT4102::Image backgroundImage("Startscreen/background.jpg");
     const int win_width = win.width();
     const int win_height = win.height();
-    for (int radius = 0; radius < win_height/3; radius++) {
+    for (int radius = 0; radius < win_height/5; radius++) {
         TDT4102::Point Position {win_width/2- radius, win_height/2 - radius};
         win.draw_image({0,0}, backgroundImage, win_width, win_height);
         win.draw_image(Position, earth, 2*radius, 2*radius);
@@ -44,11 +44,12 @@ void startScreen::endAnimation(TDT4102::AnimationWindow& win){
     TDT4102::Image backgroundImage("Startscreen/background.jpg");
     const int win_width = win.width();
     const int win_height = win.height();
-    int xPosition = win_width/2; 
-    TDT4102::Point startPosition {win_width/2-rocket.width/2, win_height/2-rocket.height/2};
-    while(xPosition -= 2){
+    const int maxRadius = win_height/5;
+    TDT4102::Point Position{win_width/2-maxRadius, win_height/2-maxRadius};
+    for (int yPosition = 0; yPosition < win_height; yPosition += 2){
         win.draw_image({0,0}, backgroundImage, win_width, win_height);
-        win.draw_image({win_width/2-rocket.width/2-xPosition, win_height/2-rocket.height/2}, rocket, 5*rocket.width, 5*rocket.height);
+        win.draw_image({win_width/2-rocket.width/2, win_height/2-rocket.height/2-yPosition}, rocket, 5*rocket.width, 5*rocket.height);
+        win.draw_image(Position, earth, 2*maxRadius, 2*maxRadius);
         win.next_frame();
     }
 }

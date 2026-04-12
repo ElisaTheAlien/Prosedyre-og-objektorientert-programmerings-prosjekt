@@ -13,12 +13,16 @@ Stellar::Stellar(TDT4102::Point position, int width, int height, const std::stri
 {
     add(OrionButton);
     OrionButton.setCallback(std::bind(&Stellar::OrionCallback, this));
+    OrionButton.setButtonColor(TDT4102::Color::transparent);
     add(BigDipperButton);
     BigDipperButton.setCallback(std::bind(&Stellar::BigDipperCallback, this));
+    OrionButton.setButtonColor(TDT4102::Color::transparent);
     add(BetegeuseButton);
     BetegeuseButton.setCallback(std::bind(&Stellar::BetelguseCallback, this));
+    BetegeuseButton.setButtonColor(TDT4102::Color::transparent);
     add(RigelButton);
     RigelButton.setCallback(std::bind(&Stellar::RigelCallback, this));
+    RigelButton.setButtonColor(TDT4102::Color::transparent);
     add(startButton);
     startButton.setCallback(std::bind(&Stellar::startCallback, this));
 
@@ -49,11 +53,12 @@ void Stellar::setFalse(){
     BigDipperButton.setVisible(false);
     BetegeuseButton.setVisible(false);
     RigelButton.setVisible(false);
+    startButton.setVisible(false);
 }
 
 void Stellar::run(){
     //Screens
-    startScreen start("Startscreen/welcome.txt", "Startscreen/earth.png", "Drawings of rocket/To right.png");
+    startScreen start("Startscreen/welcome.txt", "Startscreen/earth.png", "Drawings of rocket/Up.png");
 
     //Bodies
     Constillation Orion("Orion","Bodies/Orion/orion.png"); 
