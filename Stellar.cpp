@@ -6,7 +6,7 @@ Stellar::Stellar(TDT4102::Point position, int width, int height, const std::stri
     winHeight{height},
     OrionButton {buttonPosition1, buttonWidth, buttonHeight, buttonLabel},
     BigDipperButton {buttonPosition2, buttonWidth, buttonHeight, buttonLabel},
-    BetegeuseButton {buttonPosition1, buttonWidth, buttonHeight, buttonLabel},
+    BetegeuseButton {buttonPosition1, buttonWidth, buttonHeight-200, buttonLabel},
     RigelButton {buttonPosition2, buttonWidth, buttonHeight, buttonLabel},
     startButton {startButtonPosition, startButtonWidth, startButtonHeight, startButtonLabel},
     backButton{backButtonPosition, backButtonWidth, backButtonHeight, backButtonLabel}
@@ -148,17 +148,15 @@ void Stellar::setFalse(){
 }
 
 void Stellar::run(){
-    // Screens
     startScreen start("Startscreen/welcome.txt", "Startscreen/earth.png", "Drawings of rocket/Up.png");
-    // Bodies
     Constillation Orion("Orion","Bodies/Orion/orion.png"); 
     Constillation bigDipper("BigDipper","Bodies/Bigdipper/Big-Dipper-1.jpg");
     Star Betelgeuse("Bodies/Betelguse/betelgeuse.txt", "Bodies/Betelguse/betelgeuse.png");
     Star Rigel("Bodies/rigel.txt", "Bodies/Rigel/rigel.png");
+    Grid grid("Bodies/Orion/orion.png", "Bodies/Bigdipper/Big-Dipper-1.jpg");
 
     this->setFalse();
     start.startAnimation(*this);
-    currentScreen = Screen::START;
 
     while(!(this->should_close())){
         this -> setFalse();
@@ -167,11 +165,15 @@ void Stellar::run(){
                 startButton.setVisible(true);
                 start.draw(*this);
                 if(begin){
+                    startButton.setVisible(false);
                     start.endAnimation(*this);
+                    begin = false;
                     currentScreen = Screen::CONSTELLATION_SELECT;
                 }
                 break;
+
             case Screen::CONSTELLATION_SELECT:
+                grid.draw(*this);         
                 OrionButton.setVisible(true);
                 BigDipperButton.setVisible(true);
                 backButton.setVisible(true);
@@ -181,6 +183,7 @@ void Stellar::run(){
                     currentScreen = Screen::BIGDIPPER_DETAIL;
                 }
                 break;
+
             case Screen::ORION_DETAIL:
                 Orion.drawBody(*this);
                 BetegeuseButton.setVisible(true);
@@ -190,12 +193,13 @@ void Stellar::run(){
                     currentScreen = Screen::STAR_DETAIL;
                 }
                 break;
+
             case Screen::BIGDIPPER_DETAIL:
                 bigDipper.drawBody(*this);
                 backButton.setVisible(true);
                 break;
+
             case Screen::STAR_DETAIL:
-                Orion.drawBody(*this); // Bakgrunnslag
                 if(showBetelguse){
                     Betelgeuse.drawBody(*this);
                 } else if(showRigel){

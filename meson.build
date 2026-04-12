@@ -14,6 +14,7 @@ src = [
 'Animation.cpp',
 'Celestialbodies.cpp',
 'constillation.cpp',
+'Grid.cpp',
 'GridConstillation.cpp',
 'GridStar.cpp',
 'main.cpp',
