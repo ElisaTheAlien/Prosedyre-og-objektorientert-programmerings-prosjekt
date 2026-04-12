@@ -9,9 +9,6 @@ class Stellar : public TDT4102::AnimationWindow {
     int winWidth;
     int winHeight;
 
-    TDT4102::Image rocket;
-    std::filesystem::path rocketPath;
-
     const TDT4102::Point buttonPosition1 {0, 0};
     const TDT4102::Point buttonPosition2 {winWidth/2, 0};
     const unsigned int buttonWidth = winWidth/2;;
@@ -60,5 +57,8 @@ class Stellar : public TDT4102::AnimationWindow {
     void RigelCallback();
     void startCallback();
     void backCallback();
-    void transition(TDT4102::AnimationWindow& window);
+    void transitionUp(TDT4102::AnimationWindow& window);
+    void transitionDown(TDT4102::AnimationWindow& window);
+    void transitionRight(TDT4102::AnimationWindow& window);
+    void transitionLeft(TDT4102::AnimationWindow& window);
 };

@@ -78,8 +78,19 @@ void Stellar::backCallback(){
     }
 }
 
-void Stellar::transition(TDT4102::AnimationWindow& window){
-
+void Stellar::transitionRight(TDT4102::AnimationWindow& window){
+    TDT4102::Image backgroundImage("Startscreen/background.jpg");
+    std::filesystem::path rocketPath = "Drawings of rocket/To right.png";
+    TDT4102::Image rocket{"Drawings of rocket/To right.png"};
+    const int win_width = window.width();
+    const int win_height = window.height();
+    const int maxRadius = win_height/5;
+    TDT4102::Point Position{win_width/2-maxRadius, win_height/2-maxRadius};
+    for (int yPosition = 0; yPosition < win_height; yPosition += 2){
+        window.draw_image({0,0}, backgroundImage, win_width, win_height);
+        window.draw_image({win_width/2-rocket.width/2, win_height/2-rocket.height/2-yPosition}, rocket, 5*rocket.width, 5*rocket.height);
+        window.next_frame();
+    }
 }
 
 void Stellar::setFalse(){
