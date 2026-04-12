@@ -53,7 +53,7 @@ void Stellar::setFalse(){
 
 void Stellar::run(){
     //Screens
-    startScreen start("Startscreen/welcome.txt", "Startscreen/earth.png", "Drawing of rocket/Rocket from earth.png");
+    startScreen start("Startscreen/welcome.txt", "Startscreen/earth.png", "Drawings of rocket/From Earth.png");
 
     //Bodies
     Constillation Orion("Orion","Bodies/Orion/orion.png"); 

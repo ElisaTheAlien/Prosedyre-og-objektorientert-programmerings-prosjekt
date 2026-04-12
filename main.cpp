@@ -5,7 +5,9 @@
 #include "Stellar.h"
 
 int main() {
-    Stellar stellar({0,0}, 3000, 2000, "Stellar");
+    Stellar stellar({0,0}, 700, 800, "Stellar");
     stellar.run();
+
+    return 0;
 }
 
