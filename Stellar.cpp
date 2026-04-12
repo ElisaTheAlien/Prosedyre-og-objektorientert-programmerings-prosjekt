@@ -78,6 +78,9 @@ void Stellar::backCallback(){
     }
 }
 
+void Stellar::transition(TDT4102::AnimationWindow& window){
+
+}
 
 void Stellar::setFalse(){
     OrionButton.setVisible(false);
