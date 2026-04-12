@@ -26,7 +26,7 @@ class Stellar : public TDT4102::AnimationWindow {
 
     const unsigned int startButtonWidth = 100;
     const unsigned int startButtonHeight = 40;
-    const TDT4102::Point startButtonPosition {winWidth/2-startButtonWidth/2, winHeight/4-startButtonHeight/2};
+    const TDT4102::Point startButtonPosition {winWidth/2-50, winHeight/4-20};
     const std::string startButtonLabel = "Begin";
     TDT4102::Button startButton;
     bool begin = false;
