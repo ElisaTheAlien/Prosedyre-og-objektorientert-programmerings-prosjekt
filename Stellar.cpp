@@ -69,6 +69,7 @@ void Stellar::run(){
             start.draw(*this);
             this->next_frame();
         }
+        startButton.setVisible(false);
         start.endAnimation(*this);
         while(begin) {
             startButton.setVisible(false);

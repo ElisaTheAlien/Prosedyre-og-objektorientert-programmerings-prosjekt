@@ -46,9 +46,9 @@ void startScreen::endAnimation(TDT4102::AnimationWindow& win){
     const int win_height = win.height();
     int xPosition = win_width/2; 
     TDT4102::Point startPosition {win_width/2-rocket.width/2, win_height/2-rocket.height/2};
-    while(xPosition--){
+    while(xPosition -= 2){
         win.draw_image({0,0}, backgroundImage, win_width, win_height);
-        win.draw_image({win_width/2-rocket.width/2-xPosition, win_height/2-rocket.height/2}, rocket, rocket.width, rocket.height);
+        win.draw_image({win_width/2-rocket.width/2-xPosition, win_height/2-rocket.height/2}, rocket, 5*rocket.width, 5*rocket.height);
         win.next_frame();
     }
 }
