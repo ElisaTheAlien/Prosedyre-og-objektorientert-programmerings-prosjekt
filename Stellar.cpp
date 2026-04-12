@@ -2,13 +2,14 @@
 
 Stellar::Stellar(TDT4102::Point position, int width, int height, const std::string& title):
     AnimationWindow(position.x, position.y, width, height, title),
+    winWidth{width}, 
+    winHeight{height},
     OrionButton {buttonPosition1, buttonWidth, buttonHeight, buttonLabel},
     BigDipperButton {buttonPosition2, buttonWidth, buttonHeight, buttonLabel},
     BetegeuseButton {buttonPosition1, buttonWidth, buttonHeight, buttonLabel},
     RigelButton {buttonPosition2, buttonWidth, buttonHeight, buttonLabel},
-    startButton {startButtonPosition, startButtonWidth, startButtonHeight, startButtonLabel},
-    winWidth{width}, 
-    winHeight{height}
+    startButton {startButtonPosition, startButtonWidth, startButtonHeight, startButtonLabel}
+
 {
     add(OrionButton);
     OrionButton.setCallback(std::bind(&Stellar::OrionCallback, this));
@@ -59,41 +60,46 @@ void Stellar::run(){
     Constillation bigDipper("BigDipper","Bodies/Bigdipper/Big-Dipper-1.jpg");
     Star Betelgeuse("Bodies/Betelgeuse.txt", "Bodies/Orion/Betelgeuse.png");
     Star Rigel("Bodies/Rigel.txt", "Bodies/Rigel/Rigel.png");
-    
+
     this -> setFalse();
     start.startAnimation(*this);
+    while(!(this->should_close())){
+        startButton.setVisible(true);
+        while(!begin){
+            start.draw(*this);
+            this->next_frame();
+        }
+        start.endAnimation(*this);
+        while(begin) {
+            startButton.setVisible(false);
+            OrionButton.setVisible(true);
+            BigDipperButton.setVisible(true);
 
-    while(!start.begin){
-        start.draw(*this);
-    }
-    while(start.begin) {
-        OrionButton.setVisible(true);
-        BigDipperButton.setVisible(true);
+            if(showOrion){
+                OrionButton.setVisible(false);
+                BigDipperButton.setVisible(false);
+                Orion.drawBody(*this);
 
-        if(showOrion){
-            OrionButton.setVisible(false);
-            BigDipperButton.setVisible(false);
-            Orion.drawBody(*this);
+                if(showBetelguse){
+                    BetegeuseButton.setVisible(false);
+                    RigelButton.setVisible(false);
+                    Betelgeuse.drawBody(*this);
+                }
 
-            if(showBetelguse){
-                BetegeuseButton.setVisible(false);
-                RigelButton.setVisible(false);
-                Betelgeuse.drawBody(*this);
+                if(showRigel){
+                    BetegeuseButton.setVisible(false);
+                    RigelButton.setVisible(false);
+                    Rigel.drawBody(*this);
+                }
+
+            }
+            if(showBigDipper){
+                OrionButton.setVisible(false);
+                BigDipperButton.setVisible(false);
+                bigDipper.drawBody(*this);
             }
 
-            if(showRigel){
-                BetegeuseButton.setVisible(false);
-                RigelButton.setVisible(false);
-                Rigel.drawBody(*this);
-            }
-
+            this->next_frame();
         }
-        if(showBigDipper){
-            OrionButton.setVisible(false);
-            BigDipperButton.setVisible(false);
-            bigDipper.drawBody(*this);
-        }
-
-        this->next_frame();
     }
 }

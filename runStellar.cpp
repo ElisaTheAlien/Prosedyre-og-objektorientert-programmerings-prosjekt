@@ -5,6 +5,7 @@
 #include "GridConstillation.h"
 #include "GridStar.h"
 
+/*
 void runStellar::callbackQuit(){
     quit = true;
 }
@@ -86,3 +87,4 @@ void runStellar::run(TDT4102::AnimationWindow& window){
         window.next_frame();
     }
 }
+*/
