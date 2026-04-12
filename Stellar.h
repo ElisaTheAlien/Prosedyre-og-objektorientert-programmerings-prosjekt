@@ -3,6 +3,7 @@
 #include "startScreen.h"
 #include "star.h"
 #include "constillation.h"
+#include "Grid.h"
 
 class Stellar : public TDT4102::AnimationWindow {
     private: 
