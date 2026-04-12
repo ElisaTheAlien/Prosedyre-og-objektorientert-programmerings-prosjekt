@@ -8,7 +8,7 @@ class Stellar : public TDT4102::AnimationWindow {
     private: 
     int winWidth;
     int winHeight;
-    int newestBoolian;
+
 
     const TDT4102::Point buttonPosition1 {0, 0};
     const TDT4102::Point buttonPosition2 {winWidth/2, 0};
@@ -37,6 +37,15 @@ class Stellar : public TDT4102::AnimationWindow {
     const TDT4102::Point backButtonPosition {winWidth-150, winHeight-70};
     const std::string backButtonLabel = "Back";
     TDT4102::Button backButton;
+
+    enum class Screen {
+        START,
+        CONSTELLATION_SELECT,
+        ORION_DETAIL,
+        BIGDIPPER_DETAIL,
+        STAR_DETAIL
+    };
+    Screen currentScreen = Screen::START;
     
     public: 
     Stellar(TDT4102::Point position, int width, int height, const std::string& title);

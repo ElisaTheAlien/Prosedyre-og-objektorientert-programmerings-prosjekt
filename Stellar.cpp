@@ -51,8 +51,33 @@ void Stellar::startCallback(){
 }
 
 void Stellar::backCallback(){
-    newestBoolian = !newestBoolian;
+    switch(currentScreen){
+        case Screen::STAR_DETAIL:
+            showBetelguse = false;
+            showRigel = false;
+            currentScreen = Screen::ORION_DETAIL;
+            break;
+
+        case Screen::ORION_DETAIL:
+            showOrion = false;
+            currentScreen = Screen::CONSTELLATION_SELECT;
+            break;
+
+        case Screen::BIGDIPPER_DETAIL:
+            showBigDipper = false;
+            currentScreen = Screen::CONSTELLATION_SELECT;
+            break;
+
+        case Screen::CONSTELLATION_SELECT:
+            begin = false;
+            currentScreen = Screen::START;
+            break;
+
+        default:
+            break;
+    }
 }
+
 
 void Stellar::setFalse(){
     OrionButton.setVisible(false);
@@ -64,57 +89,63 @@ void Stellar::setFalse(){
 }
 
 void Stellar::run(){
-    //Screens
+    // Screens
     startScreen start("Startscreen/welcome.txt", "Startscreen/earth.png", "Drawings of rocket/Up.png");
-
-    //Bodies
+    // Bodies
     Constillation Orion("Orion","Bodies/Orion/orion.png"); 
     Constillation bigDipper("BigDipper","Bodies/Bigdipper/Big-Dipper-1.jpg");
     Star Betelgeuse("Bodies/Betelguse/betelgeuse.txt", "Bodies/Betelguse/betelgeuse.png");
     Star Rigel("Bodies/rigel.txt", "Bodies/Rigel/rigel.png");
 
-    this -> setFalse();
+    this->setFalse();
     start.startAnimation(*this);
-    while(!(this->should_close())){
-        startButton.setVisible(true);
-        while(!begin){
-            start.draw(*this);
-            this->next_frame();
-        }
-        startButton.setVisible(false);
-        start.endAnimation(*this);
-        while(begin) {
-            startButton.setVisible(false);
-            OrionButton.setVisible(true);
-            BigDipperButton.setVisible(true);
+    currentScreen = Screen::START;
 
-            if(showOrion){
-                OrionButton.setVisible(false);
-                BigDipperButton.setVisible(false);
+    while(!(this->should_close())){
+        this -> setFalse();
+        switch(currentScreen){
+            case Screen::START:
+                startButton.setVisible(true);
+                start.draw(*this);
+                if(begin){
+                    start.endAnimation(*this);
+                    currentScreen = Screen::CONSTELLATION_SELECT;
+                }
+                break;
+            case Screen::CONSTELLATION_SELECT:
+                OrionButton.setVisible(true);
+                BigDipperButton.setVisible(true);
+                backButton.setVisible(true);
+                if(showOrion){
+                    currentScreen = Screen::ORION_DETAIL;
+                } else if(showBigDipper){
+                    currentScreen = Screen::BIGDIPPER_DETAIL;
+                }
+                break;
+            case Screen::ORION_DETAIL:
                 Orion.drawBody(*this);
                 BetegeuseButton.setVisible(true);
                 RigelButton.setVisible(true);
-
-                if(showBetelguse){
-                    BetegeuseButton.setVisible(false);
-                    RigelButton.setVisible(false);
-                    Betelgeuse.drawBody(*this);
+                backButton.setVisible(true);
+                if(showBetelguse || showRigel){
+                    currentScreen = Screen::STAR_DETAIL;
                 }
-
-                if(showRigel){
-                    BetegeuseButton.setVisible(false);
-                    RigelButton.setVisible(false);
+                break;
+            case Screen::BIGDIPPER_DETAIL:
+                bigDipper.drawBody(*this);
+                backButton.setVisible(true);
+                break;
+            case Screen::STAR_DETAIL:
+                Orion.drawBody(*this); // Bakgrunnslag
+                if(showBetelguse){
+                    Betelgeuse.drawBody(*this);
+                } else if(showRigel){
                     Rigel.drawBody(*this);
                 }
-
-            }
-            if(showBigDipper){
-                OrionButton.setVisible(false);
-                BigDipperButton.setVisible(false);
-                bigDipper.drawBody(*this);
-            }
-
-            this->next_frame();
+                backButton.setVisible(true);
+                break;
         }
+
+        this->next_frame();
     }
 }
