@@ -8,7 +8,8 @@ Stellar::Stellar(TDT4102::Point position, int width, int height, const std::stri
     BigDipperButton {buttonPosition2, buttonWidth, buttonHeight, buttonLabel},
     BetegeuseButton {buttonPosition1, buttonWidth, buttonHeight, buttonLabel},
     RigelButton {buttonPosition2, buttonWidth, buttonHeight, buttonLabel},
-    startButton {startButtonPosition, startButtonWidth, startButtonHeight, startButtonLabel}
+    startButton {startButtonPosition, startButtonWidth, startButtonHeight, startButtonLabel},
+    backButton{backButtonPosition, backButtonWidth, backButtonHeight, backButtonLabel}
 
 {
     add(OrionButton);
@@ -25,7 +26,8 @@ Stellar::Stellar(TDT4102::Point position, int width, int height, const std::stri
     RigelButton.setButtonColor(TDT4102::Color::transparent);
     add(startButton);
     startButton.setCallback(std::bind(&Stellar::startCallback, this));
-
+    add(backButton);
+    backButton.setCallback(std::bind(&Stellar::backCallback, this));
 }
 
 void Stellar::OrionCallback(){
@@ -48,12 +50,17 @@ void Stellar::startCallback(){
     begin = true;
 }
 
+void Stellar::backCallback(){
+    newestBoolian = !newestBoolian;
+}
+
 void Stellar::setFalse(){
     OrionButton.setVisible(false);
     BigDipperButton.setVisible(false);
     BetegeuseButton.setVisible(false);
     RigelButton.setVisible(false);
     startButton.setVisible(false);
+    backButton.setVisible(false);
 }
 
 void Stellar::run(){
@@ -63,8 +70,8 @@ void Stellar::run(){
     //Bodies
     Constillation Orion("Orion","Bodies/Orion/orion.png"); 
     Constillation bigDipper("BigDipper","Bodies/Bigdipper/Big-Dipper-1.jpg");
-    Star Betelgeuse("Bodies/Betelgeuse.txt", "Bodies/Orion/Betelgeuse.png");
-    Star Rigel("Bodies/Rigel.txt", "Bodies/Rigel/Rigel.png");
+    Star Betelgeuse("Bodies/Betelguse/betelgeuse.txt", "Bodies/Betelguse/betelgeuse.png");
+    Star Rigel("Bodies/rigel.txt", "Bodies/Rigel/rigel.png");
 
     this -> setFalse();
     start.startAnimation(*this);
@@ -85,6 +92,8 @@ void Stellar::run(){
                 OrionButton.setVisible(false);
                 BigDipperButton.setVisible(false);
                 Orion.drawBody(*this);
+                BetegeuseButton.setVisible(true);
+                RigelButton.setVisible(true);
 
                 if(showBetelguse){
                     BetegeuseButton.setVisible(false);

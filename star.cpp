@@ -4,11 +4,17 @@ Star::Star(std::string infoPath, std::string imagePath_)
     : image_path{imagePath_},    
       image{image_path}
 {
-    std::ifstream inputStream{infoPath};
-    if (inputStream) {
-        inputStream >> *this;
-    }
+    try {
+            std::ifstream inputStream{infoPath};
+
+            if (inputStream) {
+                inputStream >> *this;
+            }
+        } catch (const std::exception& e) {
+            std::cerr << "Uventet feil: " << e.what() << std::endl;
+        }
 }
+
 
 std::ifstream& operator>> (std::ifstream& inputStream, Star& star){
     inputStream >> star.name; 
@@ -21,7 +27,7 @@ std::ifstream& operator>> (std::ifstream& inputStream, Star& star){
 }
 
 void Star::drawBody(TDT4102::AnimationWindow& win) {
-    TDT4102::Image backgroundImage("background.jpg");
+    TDT4102::Image backgroundImage("Startscreen/background.jpg");
     const int win_width = win.width();
     const int win_height = win.height();
     win.draw_image({0,0}, backgroundImage, win_width, win_height);

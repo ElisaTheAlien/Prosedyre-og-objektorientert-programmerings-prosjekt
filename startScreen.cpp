@@ -6,14 +6,10 @@ startScreen::startScreen(std::string textPath, std::string earthPath_, std::stri
 {
     try {
             std::ifstream inputStream{textPath};
-            inputStream.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 
             if (inputStream) {
                 inputStream >> *this;
             }
-
-        } catch (const std::ios_base::failure& e) {
-            std::cerr << "Feil ved åpning av filen '" << textPath << "': " << e.what() << std::endl;
         } catch (const std::exception& e) {
             std::cerr << "Uventet feil: " << e.what() << std::endl;
         }
