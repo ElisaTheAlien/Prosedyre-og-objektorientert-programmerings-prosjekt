@@ -8,4 +8,8 @@ Stellar er inspirert av en app som heter "Stellarium", som brukes for å utforsk
 Det vi har laget er et interaktivt "spill" hvor man får utforske litt selv gjennom artige animasjoner og bilder.
 
 ------------------------------------------------------------------------------------------------
+Dokumentasjon
 
+Vi startet først med å finen ut av hva vi trengte, slik som klasser og funksjoner. Deretter hvordan de henger sammen og hvordan dette skulle se ut. Når vi hadde dannet ideen startet vi med å skrive klassene i ulike h- og cpp-filer. Vi tenkte at det var unødvendig å lage en egen klasse for constillation og star, uten at de hadde helt forskjellige funksjoner. Derfor lagde vi forelder-klasser og brukte mye arv ettersom det var den beste måten å løse dette på. 
+
+Deretter måtte vi lage startScreen og en generell run-funksjon. Vi oppdaget flere..
