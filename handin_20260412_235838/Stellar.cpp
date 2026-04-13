@@ -4,10 +4,10 @@ Stellar::Stellar(TDT4102::Point position, int width, int height, const std::stri
     AnimationWindow(position.x, position.y, width, height, title),
     winWidth{width}, 
     winHeight{height},
-    OrionButton {buttonPosition1, buttonWidth, buttonHeight, "Orion"},
-    BigDipperButton {buttonPosition2, buttonWidth, buttonHeight, "Big Dipper"},
-    BetegeuseButton {buttonPosition1, buttonWidth, buttonHeight, buttonLabel},
-    RigelButton {buttonPosition2, buttonWidth, buttonHeight-200, buttonLabel},
+    OrionButton {buttonPosition1, buttonWidth, buttonHeight, buttonLabel},
+    BigDipperButton {buttonPosition2, buttonWidth, buttonHeight, buttonLabel},
+    BetegeuseButton {buttonPosition1, buttonWidth, buttonHeight-200, buttonLabel},
+    RigelButton {buttonPosition2, buttonWidth, buttonHeight, buttonLabel},
     startButton {startButtonPosition, startButtonWidth, startButtonHeight, startButtonLabel},
     backButton{backButtonPosition, backButtonWidth, backButtonHeight, backButtonLabel},
     quitButton{quitButtonPosition, quitButtonWidth, quitButtonHeight, quitButtonLabel}
@@ -16,10 +16,9 @@ Stellar::Stellar(TDT4102::Point position, int width, int height, const std::stri
     add(OrionButton);
     OrionButton.setCallback(std::bind(&Stellar::OrionCallback, this));
     OrionButton.setButtonColor(TDT4102::Color::transparent);
-    OrionButton.setButtonColorHover(TDT4102::Color::transparent);
     add(BigDipperButton);
     BigDipperButton.setCallback(std::bind(&Stellar::BigDipperCallback, this));
-    BigDipperButton.setButtonColor(TDT4102::Color::transparent);
+    OrionButton.setButtonColor(TDT4102::Color::transparent);
     add(BetegeuseButton);
     BetegeuseButton.setCallback(std::bind(&Stellar::BetelguseCallback, this));
     BetegeuseButton.setButtonColor(TDT4102::Color::transparent);
@@ -35,39 +34,51 @@ Stellar::Stellar(TDT4102::Point position, int width, int height, const std::stri
 }
 
 void Stellar::OrionCallback(){
-    pendingTransition = TransitionDir::RIGHT;
-    nextScreen = Screen::ORION_DETAIL;
+    showOrion = true;
 }
 
 void Stellar::BigDipperCallback(){
-    pendingTransition = TransitionDir::RIGHT;
-    nextScreen = Screen::BIGDIPPER_DETAIL;
+    showBigDipper = true;
 }
 
 void Stellar::BetelguseCallback(){
-    pendingTransition = TransitionDir::RIGHT;
-    nextScreen = Screen::STAR_DETAIL;
-    showBetelguse = true; // For å vite hvilken stjerne som skal tegnes
+    showBetelguse = true;
 }
 
 void Stellar::RigelCallback(){
-    pendingTransition = TransitionDir::RIGHT;
-    nextScreen = Screen::STAR_DETAIL;
     showRigel = true;
 }
 
-void Stellar::backCallback(){
-    pendingTransition = TransitionDir::LEFT;
-    switch(currentScreen){
-        case Screen::STAR_DETAIL:         nextScreen = Screen::ORION_DETAIL; break;
-        case Screen::ORION_DETAIL:
-        case Screen::BIGDIPPER_DETAIL:    nextScreen = Screen::CONSTELLATION_SELECT; break;
-        case Screen::CONSTELLATION_SELECT: nextScreen = Screen::START; break;
-        default: nextScreen = Screen::START; break;
-    }
-}
 void Stellar::startCallback(){
     begin = true;
+}
+
+void Stellar::backCallback(){
+    switch(currentScreen){
+        case Screen::STAR_DETAIL:
+            showBetelguse = false;
+            showRigel = false;
+            currentScreen = Screen::ORION_DETAIL;
+            break;
+
+        case Screen::ORION_DETAIL:
+            showOrion = false;
+            currentScreen = Screen::CONSTELLATION_SELECT;
+            break;
+
+        case Screen::BIGDIPPER_DETAIL:
+            showBigDipper = false;
+            currentScreen = Screen::CONSTELLATION_SELECT;
+            break;
+
+        case Screen::CONSTELLATION_SELECT:
+            begin = false;
+            currentScreen = Screen::START;
+            break;
+
+        default:
+            break;
+    }
 }
 
 void Stellar::quitCallback(){
@@ -75,29 +86,29 @@ void Stellar::quitCallback(){
 }
 
 void Stellar::logVisit(const std::string& bodyName){
-    std::ofstream logFile("visit_log.txt", std::ios::app);
+    std::ofstream logFile("visit_log.txt", std::ios::app); // app = legg til, ikke overskriv
     if(logFile.is_open()){
+        // Hent nåværende tid
         std::time_t now = std::time(nullptr);
         std::string timeStr = std::ctime(&now);
-        timeStr.pop_back();
+        timeStr.pop_back(); // Fjern newline fra ctime
         
         logFile << "[" << timeStr << "] Visited: " << bodyName << "\n";
         logFile.close();
     }
 }
 
-void Stellar::transitionRight(TDT4102::AnimationWindow& window) {
+void Stellar::transitionRight(TDT4102::AnimationWindow& window){
     TDT4102::Image backgroundImage("Startscreen/background.jpg");
+    std::filesystem::path rocketPath = "Drawings of rocket/To right.png";
     TDT4102::Image rocket("Drawings of rocket/To right.png");
     const int win_width = window.width();
     const int win_height = window.height();
-    for (int xPosition = -rocket.width; xPosition < win_width; xPosition += 10) {
-        window.draw_image({0, 0}, backgroundImage, win_width, win_height);
-        window.draw_image({xPosition, win_height / 2 - (rocket.height * 5 / 2)}, 
-                          rocket, 
-                          5 * rocket.width, 
-                          5 * rocket.height);
-        
+    const int maxRadius = win_height/5;
+    TDT4102::Point Position{win_width/2-maxRadius, win_height/2-maxRadius};
+    for (int xPosition = 0; xPosition < win_height; xPosition += 2){
+        window.draw_image({0,0}, backgroundImage, win_width, win_height);
+        window.draw_image({win_width/2-rocket.width/2 + xPosition, win_height/2-rocket.height/2}, rocket, 5*rocket.width, 5*rocket.height);
         window.next_frame();
     }
 }
@@ -132,18 +143,17 @@ void Stellar::transitionDown(TDT4102::AnimationWindow& window){
     }
 }
 
-void Stellar::transitionLeft(TDT4102::AnimationWindow& window) {
+void Stellar::transitionLeft(TDT4102::AnimationWindow& window){
     TDT4102::Image backgroundImage("Startscreen/background.jpg");
+    std::filesystem::path rocketPath = "Drawings of rocket/To left.png";
     TDT4102::Image rocket("Drawings of rocket/To left.png");
-
     const int win_width = window.width();
     const int win_height = window.height();
-    for (int xPosition = win_width; xPosition > -rocket.width; xPosition -= 10) {
-        window.draw_image({0, 0}, backgroundImage, win_width, win_height);
-        window.draw_image({xPosition, win_height / 2 - (rocket.height * 5 / 2)}, 
-                          rocket, 
-                          5 * rocket.width, 
-                          5 * rocket.height);
+    const int maxRadius = win_height/5;
+    TDT4102::Point Position{win_width/2-maxRadius, win_height/2-maxRadius};
+    for (int xPosition = 0; xPosition < win_height; xPosition += 2){
+        window.draw_image({0,0}, backgroundImage, win_width, win_height);
+        window.draw_image({win_width/2-rocket.width/2 - xPosition, win_height/2-rocket.height/2}, rocket, 5*rocket.width, 5*rocket.height);
         window.next_frame();
     }
 }
@@ -170,35 +180,20 @@ void Stellar::run(){
     start.startAnimation(*this);
 
     while(!(this->should_close())){
-        
-        if (pendingTransition != TransitionDir::NONE) {
-            this->setFalse(); 
-            
-            if (pendingTransition == TransitionDir::RIGHT) transitionRight(*this);
-            if (pendingTransition == TransitionDir::LEFT)  transitionLeft(*this);
-            if (pendingTransition == TransitionDir::UP)    transitionUp(*this);
-            if (pendingTransition == TransitionDir::DOWN)  transitionDown(*this);
-            
-            currentScreen = nextScreen;
-            if (currentScreen == Screen::ORION_DETAIL) logVisit("Orion");
-            if (currentScreen == Screen::BIGDIPPER_DETAIL) logVisit("Big Dipper");
-            
-            pendingTransition = TransitionDir::NONE; 
-        }
-
-        this->setFalse(); 
-        
+        this -> setFalse();
         switch(currentScreen){
             case Screen::START:
                 startButton.setVisible(true);
                 quitButton.setVisible(true);
                 start.draw(*this);
-                if(quit) this->close(); 
+                if(quit){
+                    this -> close(); 
+                }
                 if(begin){
-                    startButton.setVisible(false);
-                    quitButton.setVisible(false);
                     start.endAnimation(*this);
                     begin = false;
+                    startButton.setVisible(false);
+                    quitButton.setVisible(false);
                     currentScreen = Screen::CONSTELLATION_SELECT;
                 }
                 break;
@@ -208,6 +203,13 @@ void Stellar::run(){
                 OrionButton.setVisible(true);
                 BigDipperButton.setVisible(true);
                 backButton.setVisible(true);
+                if(showOrion){    
+                    currentScreen = Screen::ORION_DETAIL;
+                    logVisit("Orion");
+                } else if(showBigDipper){
+                    currentScreen = Screen::BIGDIPPER_DETAIL;
+                    logVisit("Big Dipper");
+                }
                 break;
 
             case Screen::ORION_DETAIL:
@@ -215,6 +217,9 @@ void Stellar::run(){
                 BetegeuseButton.setVisible(true);
                 RigelButton.setVisible(true);
                 backButton.setVisible(true);
+                if(showBetelguse || showRigel){
+                    currentScreen = Screen::STAR_DETAIL;
+                }
                 break;
 
             case Screen::BIGDIPPER_DETAIL:
@@ -223,8 +228,13 @@ void Stellar::run(){
                 break;
 
             case Screen::STAR_DETAIL:
-                if(showBetelguse) Betelgeuse.drawBody(*this);
-                else if(showRigel) Rigel.drawBody(*this);
+                if(showBetelguse){  
+                    Betelgeuse.drawBody(*this);
+                    logVisit("Betelgeuse");
+                } else if(showRigel){ 
+                    Rigel.drawBody(*this);
+                    logVisit("Rigel");   
+                }
                 backButton.setVisible(true);
                 break;
         }

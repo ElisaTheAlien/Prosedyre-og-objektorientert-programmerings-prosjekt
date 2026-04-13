@@ -1,11 +1,8 @@
 #include "Grid.h"
 
-Grid::Grid(std::string const1_path_, std::string const2_path_)
-try
-    : const1_path{const1_path_},
-      const1{const1_path},
-      const2_path{const2_path_},
-      const2{const2_path}
+Grid::Grid(std::string const1_path_, std::string const2_path_):
+    const1_path{const1_path_}, const1{const1_path},
+    const2_path{const2_path_}, const2{const2_path}
 {
     if(!std::filesystem::exists(const1_path)){
         throw std::runtime_error("Grid: finner ikke fil");
@@ -13,11 +10,6 @@ try
     if(!std::filesystem::exists(const2_path)){
         throw std::runtime_error("Grid: finner ikke fil");
     }
-}
-catch(const std::exception& e)
-{
-    std::cerr << "Feil i Grid konstruktør:\n" << e.what() << std::endl;
-    throw;
 }
 
 void Grid::draw(TDT4102::AnimationWindow& win){

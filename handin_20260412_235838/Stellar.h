@@ -55,10 +55,6 @@ class Stellar : public TDT4102::AnimationWindow {
         STAR_DETAIL
     };
     Screen currentScreen = Screen::START;
-
-    enum class TransitionDir { NONE, UP, DOWN, LEFT, RIGHT };
-    TransitionDir pendingTransition = TransitionDir::NONE;
-    Screen nextScreen = Screen::START;
     
     public: 
     Stellar(TDT4102::Point position, int width, int height, const std::string& title);

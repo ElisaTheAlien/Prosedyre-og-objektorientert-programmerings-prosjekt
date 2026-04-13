@@ -53,7 +53,7 @@ void startScreen::endAnimation(TDT4102::AnimationWindow& win){
     TDT4102::Point Position{win_width/2-maxRadius, win_height/2-maxRadius};
     for (int yPosition = 0; yPosition < win_height; yPosition += 2){
         win.draw_image({0,0}, backgroundImage, win_width, win_height);
-        win.draw_image({win_width/2-rocket.width-45, win_height/2-rocket.height/2-yPosition}, rocket, 5*rocket.width, 5*rocket.height);
+        win.draw_image({win_width/2-rocket.width/2, win_height/2-rocket.height/2-yPosition}, rocket, 5*rocket.width, 5*rocket.height);
         win.draw_image(Position, earth, 2*maxRadius, 2*maxRadius);
         win.next_frame();
     }
